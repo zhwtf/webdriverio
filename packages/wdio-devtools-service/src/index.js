@@ -12,7 +12,7 @@ export default class DevToolsService {
     }
 
     beforeSession (_, caps) {
-        if (caps.browserName !== 'chrome' || (caps.version && caps.version < 63)) {
+        if (caps.browserName.toLowerCase() !== 'chrome' || (caps.version && caps.version < 63)) {
             return log.error(UNSUPPORTED_ERROR_MESSAGE)
         }
 
