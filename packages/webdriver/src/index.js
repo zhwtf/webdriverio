@@ -1,6 +1,7 @@
 import logger from '@wdio/logger'
 import merge from 'lodash.merge'
 import { validateConfig } from '@wdio/config'
+import command from 'remotedriver'
 
 import webdriverMonad from './monad'
 import WebDriverRequest from './request'
@@ -71,7 +72,7 @@ export default class WebDriver {
             isChrome: { value: isChrome }
         }
 
-        const protocolCommands = getPrototype({ isW3C, isMobile, isIOS, isAndroid, isChrome, isSauce })
+        const protocolCommands = getPrototype({ isW3C: true, isMobile, isIOS, isAndroid, isChrome, isSauce }, command)
         const prototype = merge(protocolCommands, environmentFlags, userPrototype)
         const monad = webdriverMonad(params, modifier, prototype)
         return monad(response.value.sessionId || response.sessionId, commandWrapper)
